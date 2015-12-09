@@ -1,0 +1,27 @@
+###############################################################################
+#
+# digitalDay -
+#
+###############################################################################
+#
+# Usage method {
+#     Display usage message
+# }
+#
+# If number of attributes is not equal to 0 {
+#     Display usage method
+#     Exit the program with exit code 1
+# }
+#
+# If number passed by user is not positive or negative {
+#     Display usage method
+#     Exit the program with exit code 1
+# }
+#
+# Calculate the modulo - number passed by user % 7
+#
+# Define the weekdays' names in array
+#
+# Display the weekday name according to the modulo operation result
+#
+# Exit the program with exit code 0
