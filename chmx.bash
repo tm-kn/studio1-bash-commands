@@ -1,19 +1,25 @@
 #!/bin/bash
-#####################################################################
+################################################################################
 #
-# chmx - a command that gives executable permission to a set of files
+# chmx - a command that gives executable permission to a set of files specified
+#        in parametres.
 #
 # Tomasz Knapik
-# 03 November 2015
-#####################################################################
+###############################################################################
 
-if [ $# -lt 1 ]
-then
+usage () {
     echo 'Usage '$0': Requires at least one parameter.'
     echo 'Parameters are name of files which will be set as executable.'
-    exit
+}
+
+# Check if number of arguments it's valid
+if [ $# -lt 1 ]
+then
+    usage
+    exit 1
 fi
 
+# Loop through arguments
 for filename in "$@"
 do
     # Check if file exists.
@@ -26,3 +32,5 @@ do
         echo $filename "does not exist."
     fi
 done
+
+exit 0
