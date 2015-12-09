@@ -44,10 +44,9 @@ files=$(ls -1 $directory )
 for file in $files
 do
     # If file in the loop is directory, then skip it.
-    if [ -d $file ]
+    if [ -d $directory/$file ]
     then
         continue
-
     # If option is -head
     elif [ $option == "-head" ] || [ -z $option ]
     then
