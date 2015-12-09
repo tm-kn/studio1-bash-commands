@@ -10,11 +10,18 @@
 ###############################################################################
 
 usage () {
-    echo "Usage $0 [number]"
+    echo "Usage $0 [positive or negative integer]"
 }
 
 # Check if number arguments is valid
 if [ $# -ne 1 ]
+then
+    usage
+    exit 1
+fi
+
+# Validate the number entered by user
+if [[ ! $1 =~ ^[0-9]*$ ]] && [[ ! $1 =~ ^([\+]|[\-])[0-9]*$ ]]
 then
     usage
     exit 1
