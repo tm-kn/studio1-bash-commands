@@ -17,6 +17,13 @@ usage () {
     echo "specified directory"
 }
 
+# First check if user wants to see help
+if [ $option == '-help' ] || [ $option == '--help' ]
+then
+    usage
+    exit 0
+fi
+
 # Check if number of arguments is valid
 if [ $# -ne 3 ]
 then
