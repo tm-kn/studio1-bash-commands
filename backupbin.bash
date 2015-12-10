@@ -16,7 +16,7 @@ number_of_files_to_backup=$(ls $home_bin_dir -1 | wc -l)
 
 
 usage () {
-    echo "Usage "$0": backups files from local bin to backup directory."
+    echo "Usage "$0": backups files from local bin to backup directory ("$binbackup_dir")."
 }
 
 
