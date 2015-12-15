@@ -9,6 +9,10 @@
 # Tomasz Knapik <u1562595@unimail.hud.ac.uk>
 ###############################################################################
 
+invalid_input=0
+valid_input=0
+break_control_loop=0
+
 
 usage () {
     echo "Usage $0 [positive or negative integer(s)]"
@@ -29,8 +33,9 @@ getDay() {
         # Validate the number entered by user
         if [[ ! $number =~ ^[0-9]*$ ]] && [[ ! $number =~ ^([\+]|[\-])[0-9]*$ ]]
         then
-            usage
-            exit 1
+            echo -e "\t"$number" is an invalid value (not an integer)."
+            invalid_input=$(($invalid_input + 1))
+            continue
         fi
 
         # Calculate the modulo
@@ -41,9 +46,10 @@ getDay() {
 
         # Echo the "digital day"
         echo -e '\t'$number'%7 = '$modulo' | '${days[$modulo]}
+
+        valid_input=$(($valid_input + 1))
     done
 
-    echo ""
 }
 
 
@@ -63,30 +69,44 @@ then
 fi
 
 getDay $@
+echo ""
+
+
+# If any of the arguments is valid, output usage information
+if [ $valid_input -lt 1 ]
+then
+    usage
+    exit 1
+fi
+
 
 # Control loop
 while read -r
 do
-    getDay $REPLY
-
     # If control input is -1, break the loop and set the variable to break
     # outer loop
     for number in ${REPLY[@]}
     do
-        if [[ $number -eq -1 ]]
+        if [[ $number == -1 ]]
         then
-            BREAK_CONTROL_LOOP=1
+            break_control_loop=1
             break
         fi
+
+        getDay $number
     done
+    echo ""
 
     # Break the loop if this var is set
-    if [ $BREAK_CONTROL_LOOP ]
+    if [ $break_control_loop -eq 1 ]
     then
         echo $0": Exiting the program..."
         break
     fi
 
 done
+
+echo "Valid inputs: "$valid_input
+echo "Invalid inputs: "$invalid_input
 
 exit 0
