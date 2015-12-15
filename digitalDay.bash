@@ -42,6 +42,8 @@ getDay() {
         # Echo the "digital day"
         echo -e '\t'$number'%7 = '$modulo'| '${days[$modulo]}
     done
+
+    echo ""
 }
 
 
@@ -58,7 +60,6 @@ do
     do
         if [[ $number -eq -1 ]]
         then
-            echo ""
             echo "Exiting the program (-1)..."
             exit 0
         fi
