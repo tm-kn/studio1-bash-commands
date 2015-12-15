@@ -1,7 +1,7 @@
 #!/bin/bash
 ###############################################################################
 #
-# digitalDay - takes a single numeric argument and prints out the day of the
+# digitalDay - takes multiple numeric arguments and prints out the days of the
 #              week based on the formula, number modulo 7.
 #
 # Example: 0 - Sunday, 1 - Monday, 2 - Tuesday, etc.
