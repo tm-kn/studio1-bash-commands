@@ -40,30 +40,55 @@ getDay() {
         days=('Sunday' 'Monday' 'Tuesday' 'Wednesday' 'Thursday' 'Friday' 'Saturday')
 
         # Echo the "digital day"
-        echo -e '\t'$number'%7 = '$modulo'| '${days[$modulo]}
+        echo -e '\t'$number'%7 = '$modulo' | '${days[$modulo]}
     done
 
     echo ""
 }
 
 
-# Call the function
-getDay $@
+# If user wants help, give them help
+for arg in "$@"
+do
+    if [[ $arg == *"help"* ]]
+    then
+        usage
+        exit 0
+    fi
+done
+
+
+# Call the function if there're any arguments,
+# otherwise it will skip to the control loop
+if [ $# -ne 0 ]
+then
+    getDay $@
+fi
+
 
 # Control loop
 while read -r
 do
     getDay $REPLY
 
-    # If control input is -1, exit the program
+    # If control input is -1, break the loop and set the variable to break
+    # outer loop
     for number in ${REPLY[@]}
     do
         if [[ $number -eq -1 ]]
         then
-            echo "Exiting the program (-1)..."
-            exit 0
+            BREAK_CONTROL_LOOP=1
+            break
         fi
     done
+
+    # Break the loop if this var is set
+    if [ $BREAK_CONTROL_LOOP ]
+    then
+        echo $0": Exiting the program..."
+        break
+    fi
+
 done
 
 exit 0
