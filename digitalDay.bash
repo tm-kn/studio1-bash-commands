@@ -72,7 +72,8 @@ getDay $@
 echo ""
 
 
-# If any of the arguments is valid, output usage information
+# If all of the arguments are not valid, output usage information and
+# exit the programme
 if [ $valid_input -lt 1 ]
 then
     usage
