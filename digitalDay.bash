@@ -47,24 +47,22 @@ getDay() {
 }
 
 
-# If user wants help, give them help
-for arg in "$@"
-do
-    if [[ $arg == *"help"* ]]
-    then
-        usage
-        exit 0
-    fi
-done
-
-
-# Call the function if there're any arguments,
-# otherwise it will skip to the control loop
-if [ $# -ne 0 ]
+# Echo usage information if no arguments were provided
+if [ $# -eq 0 ]
 then
-    getDay $@
+    usage
+    exit 1
 fi
 
+
+# -help option
+if [[ $1 == "-help" ]]
+then
+    usage
+    exit 0
+fi
+
+getDay $@
 
 # Control loop
 while read -r
